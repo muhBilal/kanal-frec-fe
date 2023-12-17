@@ -93,13 +93,15 @@ export const AuthContextProvider = ({children}) => {
                 });
 
                 // swal('Sukses')
-                router.push('/');
-                setCookie('isLogin', true, {
-                    maxAge: 60 * 60 * 24,
-                });
-                setCookie('ID', auth.currentUser.uid, {
-                    maxAge: 60 * 60 * 24,
-                });
+                router.push('/submissions');
+                // setCookie('isLogin', true, {
+                //     maxAge: 60 * 60 * 24,
+                // });
+                // setCookie('ID', auth.currentUser.uid, {
+                //     maxAge: 60 * 60 * 24,
+                // });
+                setCookie('isLogin');
+                setCookie('ID', auth.currentUser.uid);
 
             } else {
                 const admin_ref = doc(db, 'Users', result.user.uid);

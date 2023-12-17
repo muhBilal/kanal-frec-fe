@@ -2,6 +2,7 @@ import Image from "next/image";
 import {BiSolidChat} from "react-icons/bi";
 import {FaMapLocationDot} from "react-icons/fa6";
 import {SiGoogleforms} from "react-icons/si";
+import { GiRadioTower } from "react-icons/gi";
 import {CgProfile} from "react-icons/cg";
 import {useEffect} from "react";
 import {useRouter} from "next/navigation";
@@ -69,7 +70,13 @@ const Sidebar = ({id}) => {
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/product"
+                               className="flex items-center p-2 text-gray-800 rounded-lg hover:bg-gray-700 group justify-center group">
+                                <GiRadioTower className={`text-gray-400 text-2xl group-hover:text-white`}/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/maps"
                                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-700 group justify-center group">
                                 <FaMapLocationDot className={`text-gray-400 text-2xl group-hover:text-white`}/>
                             </a>
