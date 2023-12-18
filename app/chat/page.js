@@ -1,7 +1,7 @@
 'use client'
 import Layouts from "@/app/Components/layouts";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {FaClipboard} from "react-icons/fa";
 import {SlDislike, SlLike} from "react-icons/sl";
 import axios from "axios";
@@ -9,7 +9,8 @@ import {IoIosRadio} from "react-icons/io";
 import {TbAntenna} from "react-icons/tb";
 import {MdLocationCity} from "react-icons/md";
 import Loading from "@/app/Components/splashScreen";
-import {useParams, usePathname, useRouter, useSearchParams} from "next/navigation";
+import {useSearchParams} from 'next/navigation'
+
 
 export default function page() {
     const [day, setDay] = useState('')
@@ -18,6 +19,9 @@ export default function page() {
     const [messages, setMessages] = useState([]);
     const [alert, setAlert] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id')
+    const merk = searchParams.get('merk')
 
     const getDate = () => {
         const options = {
@@ -57,11 +61,11 @@ export default function page() {
                     {role: 'system', content: 'You are a friendly bot.'},
                     {role: 'user', content: input}
                 ],
-                // max_tokens: 100,
+                max_tokens: 50,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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',
+                    'Authorization': `Bearer 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`,
                 },
             });
 
@@ -80,21 +84,18 @@ export default function page() {
     }
 
     const handleCopy = (e) => {
-        navigator.clipboard.writeText(e.target.innerText)
+        navigator.clipboard.writeText(e)
         setAlert(true)
         setTimeout(() => {
             setAlert(false);
         }, 3000)
     }
 
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    const params = useParams()
     useEffect(() => {
-        const url = `${pathname}?${searchParams}${router}`
-        console.log(params)
         getDate()
+        if(id){
+            setInput(`Carikan Spesifikasi lengkap untuk ${merk} tipe ${id}`)
+        }
     }, []);
 
     return (
@@ -213,6 +214,7 @@ export default function page() {
                                onChange={(e) => setInput(e.target.value)}
                                onKeyDown={handleKeyDown}
                                value={input}
+                               autoFocus={true}
                                className="mt-5 bg-gray-50 border placeholder-gray-400 border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-5"/>
                     </section>
                 </Layouts>

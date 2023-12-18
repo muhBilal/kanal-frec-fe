@@ -93,7 +93,7 @@ export const AuthContextProvider = ({children}) => {
                 });
 
                 // swal('Sukses')
-                router.push('/submissions');
+                router.push('/submission');
                 // setCookie('isLogin', true, {
                 //     maxAge: 60 * 60 * 24,
                 // });
